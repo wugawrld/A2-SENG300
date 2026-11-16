@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class CancellationPermissionTest {
 
     /**
+     * This function will create a stream that contains 15 different test cases, a mix of:
+     *  - one of: active, canceled, completed
+     *  - one of: -1, 0, 119, 120, 121
+     *
+     * @return - Stream
+     */
+    static Stream<Arguments> allStatesAndTimes() {
+        return Stream.of(BookingState.values()).flatMap(state ->
+                Stream.of(-1L, 0L, 119L, 120L, 121L).map(start -> Arguments.of(state, start)));
+    } //allStatesAndTimes
+
+    /**
      * This function will create a stream that contains 6 different test cases, a mix of:
      *  - one of: cancelled, completed
      *  - one of: 119, 120, 121
@@ -20,5 +32,9 @@ class CancellationPermissionTest {
         return Stream.of(BookingState.CANCELLED, BookingState.COMPLETED).flatMap(state ->
                 Stream.of(119L, 120L, 121L).map(start -> Arguments.of(state, start)));
     } //inactiveStatesAndTimes
+
+
+
+
 
 }
