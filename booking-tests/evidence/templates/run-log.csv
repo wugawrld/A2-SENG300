@@ -1,1 +1,2 @@
 checkpoint,command,git_commit,working_tree_clean,passed,failed,skipped,covered_lines,total_lines,covered_branches,total_branches,mutation_status_counts,report_path
+sardar-r2-focused-20261116-151607,./mvnw -Dtest=RoomConflictTest test,1cdeb4c6f05bd66cdff8003f3c339b18d2147fd4,not recorded,15,0,0,,,,,,evidence/runs/sardar-r2/
