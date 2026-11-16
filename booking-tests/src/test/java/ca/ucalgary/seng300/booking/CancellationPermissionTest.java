@@ -33,6 +33,21 @@ class CancellationPermissionTest {
                 Stream.of(119L, 120L, 121L).map(start -> Arguments.of(state, start)));
     } //inactiveStatesAndTimes
 
+    /**
+     * This tests whether a person who does not own a booking is asctually prevented from canelling it.
+     * It should always return "DENIED"
+     * @param state - the current booking state
+     * @param start - booking's time
+     */
+    @ParameterizedTest(name = "non-owner: {0} at {1} minutes => DENIED")
+    @MethodSource("allStatesAndTimes")
+    void nonOwnerIsDeniedBeforeStateAndTime(BookingState state, long start) {
+        TestFixtures f = new TestFixtures():
+        Booking original = f.seed("b1", "R204", "owner", start, start + 60, state);
+        assertEquals(CancelStatus.DENIED, f.service.cancel("b1", "stranger"));
+        assertEquals(List.of(original), f.repository.all());
+        assertTrue(f.notifier.requests().isEmpty())l;
+    } //nonOwnerIsDeniedBeforeStateAndTime
 
 
 
