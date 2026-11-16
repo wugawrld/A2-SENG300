@@ -60,7 +60,7 @@ class CancellationPermissionTest {
     void ownerOfInactiveBookingIsRejectedBeforeTime(BookingState state, long start) {
         TestFixtures f = new TestFixtures();
         Booking original = f.seed("b1", "R204", "owner", start, start + 60, state);
-        assertEquals(CancelStatus.DENIED, f.service.cancel("b1", "owner"));
+        assertEquals(CancelStatus.INACTIVE, f.service.cancel("b1", "owner"));
         assertEquals(List.of(original), f.repository.all());
         assertTrue(f.notifier.requests().isEmpty());
     } //ownerOfInactiveBookingIsRejectedBeforeTime
