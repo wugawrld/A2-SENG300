@@ -42,7 +42,7 @@ class CancellationPermissionTest {
     @ParameterizedTest(name = "non-owner: {0} at {1} minutes => DENIED")
     @MethodSource("allStatesAndTimes")
     void nonOwnerIsDeniedBeforeStateAndTime(BookingState state, long start) {
-        TestFixtures f = new TestFixtures():
+        TestFixtures f = new TestFixtures();
         Booking original = f.seed("b1", "R204", "owner", start, start + 60, state);
         assertEquals(CancelStatus.DENIED, f.service.cancel("b1", "stranger"));
         assertEquals(List.of(original), f.repository.all());
