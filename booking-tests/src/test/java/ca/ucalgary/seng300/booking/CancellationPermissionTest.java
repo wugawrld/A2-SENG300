@@ -58,7 +58,7 @@ class CancellationPermissionTest {
     @ParameterizedTest(name = "owner: {0} at {1} minutes => INACTIVE")
     @MethodSource("inactiveStatesAndTimes")
     void ownerOfInactiveBookingIsRejectedBeforeTime(BookingState state, long start) {
-        TestFixtures f = new TestFixtures():
+        TestFixtures f = new TestFixtures();
         Booking original = f.seed("b1", "R204", "owner", start, start + 60, state);
         assertEquals(CancelStatus.DENIED, f.service.cancel("b1", "owner"));
         assertEquals(List.of(original), f.repository.all());
