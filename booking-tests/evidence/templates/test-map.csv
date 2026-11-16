@@ -1,1 +1,58 @@
 requirement_id,test_id,starting_data,inputs_or_actions,expected_response,expected_saved_data,expected_notification_requests,why_this_case_matters
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[-1;10],unrelated ACTIVE booking,create R204 start=-1 end=10,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[0;10],unrelated ACTIVE booking,create R204 start=0 end=10,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[1;1],unrelated ACTIVE booking,create R204 start=1 end=1,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[2;1],unrelated ACTIVE booking,create R204 start=2 end=1,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[-2;-1],unrelated ACTIVE booking,create R204 start=-2 end=-1,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1,CreationTimeTest.rejectsInvalidTimesWithoutEffects[0;0],unrelated ACTIVE booking,create R204 start=0 end=0,INVALID_TIME; null ID,complete snapshot unchanged,0,time partitions
+R1;R2;R5,CreationTimeTest.acceptsFirstFutureMinuteAndPersistsFullBooking,empty,create at +1 to +2,CREATED; non-null ID,one exact ACTIVE booking,0,first future-minute boundary
+R1,CreationTimeTest.invalidTimeTakesPrecedenceOverAnOverlap,same-room ACTIVE [-10;180),create [0;60),INVALID_TIME; null ID,unchanged,0,time before conflict
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[120;179],R204 ACTIVE [180;240),create [120;179),CREATED; non-null ID,existing preserved; one complete ACTIVE insertion,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[120;180],R204 ACTIVE [180;240),create [120;180),CREATED; non-null ID,existing preserved; one complete ACTIVE insertion,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[120;181],R204 ACTIVE [180;240),create [120;181),CONFLICT; null ID,complete snapshot unchanged,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[180;240],R204 ACTIVE [180;240),create [180;240),CONFLICT; null ID,complete snapshot unchanged,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[190;230],R204 ACTIVE [180;240),create [190;230),CONFLICT; null ID,complete snapshot unchanged,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[170;250],R204 ACTIVE [180;240),create [170;250),CONFLICT; null ID,complete snapshot unchanged,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[239;300],R204 ACTIVE [180;240),create [239;300),CONFLICT; null ID,complete snapshot unchanged,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[240;300],R204 ACTIVE [180;240),create [240;300),CREATED; non-null ID,existing preserved; one complete ACTIVE insertion,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.classifiesIntervalBoundaries[241;300],R204 ACTIVE [180;240),create [241;300),CREATED; non-null ID,existing preserved; one complete ACTIVE insertion,0,adjacency/overlap/containment
+R2;R5,RoomConflictTest.differentRoomsAndInactiveBookingsDoNotConflict[ACTIVE;OTHER],OTHER ACTIVE [180;240),create R204 [180;240),CREATED; non-null ID,existing preserved; one exact ACTIVE insertion,0,inactive and room partitions
+R2;R5,RoomConflictTest.differentRoomsAndInactiveBookingsDoNotConflict[CANCELLED;R204],R204 CANCELLED [180;240),create R204 [180;240),CREATED; non-null ID,existing preserved; one exact ACTIVE insertion,0,inactive and room partitions
+R2;R5,RoomConflictTest.differentRoomsAndInactiveBookingsDoNotConflict[COMPLETED;R204],R204 COMPLETED [180;240),create R204 [180;240),CREATED; non-null ID,existing preserved; one exact ACTIVE insertion,0,inactive and room partitions
+R2;R5,RoomConflictTest.differentRoomsAndInactiveBookingsDoNotConflict[CANCELLED;OTHER],OTHER CANCELLED [180;240),create R204 [180;240),CREATED; non-null ID,existing preserved; one exact ACTIVE insertion,0,inactive and room partitions
+R2;R5,RoomConflictTest.differentRoomsAndInactiveBookingsDoNotConflict[COMPLETED;OTHER],OTHER COMPLETED [180;240),create R204 [180;240),CREATED; non-null ID,existing preserved; one exact ACTIVE insertion,0,inactive and room partitions
+R2,RoomConflictTest.findsConflictAfterANonConflictingBooking,OTHER then R204 ACTIVE [180;240),create R204 [190;200),CONFLICT; null ID,complete snapshot unchanged,0,continue searching after unrelated booking
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[ACTIVE;-1],b1 ACTIVE start=-1,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[ACTIVE;0],b1 ACTIVE start=0,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[ACTIVE;119],b1 ACTIVE start=119,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[ACTIVE;120],b1 ACTIVE start=120,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[ACTIVE;121],b1 ACTIVE start=121,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[CANCELLED;-1],b1 CANCELLED start=-1,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[CANCELLED;0],b1 CANCELLED start=0,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[CANCELLED;119],b1 CANCELLED start=119,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[CANCELLED;120],b1 CANCELLED start=120,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[CANCELLED;121],b1 CANCELLED start=121,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[COMPLETED;-1],b1 COMPLETED start=-1,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[COMPLETED;0],b1 COMPLETED start=0,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[COMPLETED;119],b1 COMPLETED start=119,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[COMPLETED;120],b1 COMPLETED start=120,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.nonOwnerIsDeniedBeforeStateAndTime[COMPLETED;121],b1 COMPLETED start=121,cancel as stranger,DENIED,complete snapshot unchanged,0,permission precedes state/time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[CANCELLED;119],b1 CANCELLED start=119,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[CANCELLED;120],b1 CANCELLED start=120,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[CANCELLED;121],b1 CANCELLED start=121,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[COMPLETED;119],b1 COMPLETED start=119,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[COMPLETED;120],b1 COMPLETED start=120,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R3;R5,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime[COMPLETED;121],b1 COMPLETED start=121,cancel as owner,INACTIVE,complete snapshot unchanged,0,state precedes time
+R4;R5,CancellationBoundaryTest.enforcesCancellationBoundary[-1],ACTIVE start=-1; unrelated ACTIVE,cancel as owner,TOO_LATE,complete snapshot unchanged,0,cutoff boundaries; complete payload on success
+R4;R5,CancellationBoundaryTest.enforcesCancellationBoundary[0],ACTIVE start=0; unrelated ACTIVE,cancel as owner,TOO_LATE,complete snapshot unchanged,0,cutoff boundaries; complete payload on success
+R4;R5,CancellationBoundaryTest.enforcesCancellationBoundary[119],ACTIVE start=119; unrelated ACTIVE,cancel as owner,TOO_LATE,complete snapshot unchanged,0,cutoff boundaries; complete payload on success
+R4;R5,CancellationBoundaryTest.enforcesCancellationBoundary[120],ACTIVE start=120; unrelated ACTIVE,cancel as owner,CANCELLED,only target state CANCELLED; unrelated equal,1,cutoff boundaries; complete payload on success
+R4;R5,CancellationBoundaryTest.enforcesCancellationBoundary[121],ACTIVE start=121; unrelated ACTIVE,cancel as owner,CANCELLED,only target state CANCELLED; unrelated equal,1,cutoff boundaries; complete payload on success
+R3;R5,CancellationEffectsTest.nonOwnerCannotChangeStoredBooking,ACTIVE at120; unrelated COMPLETED,cancel as stranger,DENIED,complete snapshot unchanged,0,detects supplied bug despite correct return
+R4;R5,CancellationEffectsTest.successfulCancellationPersistsAndNotifiesExactlyOnce,ACTIVE at120; unrelated CANCELLED,cancel as owner,CANCELLED,only target state CANCELLED,1,exact notification payload; other booking unchanged
+R2;R5,CancellationEffectsTest.creatingTwoBookingsDoesNotRequestCancellationNotifications,empty,create [180;240) then [240;300),CREATED; CREATED; distinct IDs,two exact ACTIVE bookings,0,no creation cancellation notifications
+R3;R4;R5,CancellationSequencesTest.successfulCancellationThenRepeatHasOnlyOneNotification,ACTIVE at120; unrelated ACTIVE,owner cancel; owner cancel again,CANCELLED; INACTIVE,target CANCELLED after each; unrelated unchanged,1 overall,idempotent rejection after success
+R3;R4;R5,CancellationSequencesTest.denialThenOwnerCancellationPreservesTheValidPath,ACTIVE at120,stranger then owner cancel,DENIED; CANCELLED,unchanged after denial; then target CANCELLED,0 then 1,denial must not corrupt owner path
+Part6B;R5,SaveFailureTest.failedSavePropagatesWithoutChangingDataOrNotifying[120],ACTIVE at120; other COMPLETED; fail armed after seed,owner cancel,identical RepositoryException,complete snapshot unchanged; one attempted save,0,dependency failure before storage effect
+Part6B;R5,SaveFailureTest.failedSavePropagatesWithoutChangingDataOrNotifying[121],ACTIVE at121; other COMPLETED; fail armed after seed,owner cancel,identical RepositoryException,complete snapshot unchanged; one attempted save,0,dependency failure before storage effect
+Part6B;R4;R5,SaveFailureTest.unarmedRepositoryAllowsTheSameValidCancellation,ACTIVE at120; unarmed double,owner cancel,CANCELLED,target CANCELLED; one additional save,1,valid-path control
