@@ -1,0 +1,2 @@
+commit=6fdf68816a4b9b3d970646c69aba9fdfc80c6703
+command=.\mvnw.cmd -B clean verify

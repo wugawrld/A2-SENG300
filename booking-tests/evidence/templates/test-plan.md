@@ -105,6 +105,24 @@ Check ownership first, then state, then time. Any means that value does not affe
   </tbody>
 </table>
 
+### Precedence cases
+
+These rows pick values where two rules could apply, so the result shows which check runs first. Each row is a case in `CancellationPermissionTest.java`.
+
+<table>
+  <thead>
+    <tr><th>Caller is owner</th><th>Booking state</th><th>Time before start</th><th>Result</th><th>Saved data</th><th>Notifications</th><th>What it shows</th><th>Test case</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>No</td><td>CANCELLED</td><td>120 minutes</td><td>DENIED</td><td>Same bookings</td><td>0</td><td>Ownership before state. An owner would get INACTIVE here.</td><td>nonOwnerIsDeniedBeforeStateAndTime [CANCELLED; 120]</td></tr>
+    <tr><td>No</td><td>COMPLETED</td><td>121 minutes</td><td>DENIED</td><td>Same bookings</td><td>0</td><td>Ownership before state.</td><td>nonOwnerIsDeniedBeforeStateAndTime [COMPLETED; 121]</td></tr>
+    <tr><td>No</td><td>ACTIVE</td><td>119 minutes</td><td>DENIED</td><td>Same bookings</td><td>0</td><td>Ownership before time. An owner would get TOO_LATE here.</td><td>nonOwnerIsDeniedBeforeStateAndTime [ACTIVE; 119]</td></tr>
+    <tr><td>No</td><td>ACTIVE</td><td>120 minutes</td><td>DENIED</td><td>Same bookings</td><td>0</td><td>Ownership blocks a request that is otherwise valid. An owner would get CANCELLED here.</td><td>nonOwnerIsDeniedBeforeStateAndTime [ACTIVE; 120]</td></tr>
+    <tr><td>Yes</td><td>CANCELLED</td><td>119 minutes</td><td>INACTIVE</td><td>Same bookings</td><td>0</td><td>State before time. An ACTIVE booking would get TOO_LATE here.</td><td>ownerOfInactiveBookingIsRejectedBeforeTime [CANCELLED; 119]</td></tr>
+    <tr><td>Yes</td><td>COMPLETED</td><td>119 minutes</td><td>INACTIVE</td><td>Same bookings</td><td>0</td><td>State before time.</td><td>ownerOfInactiveBookingIsRejectedBeforeTime [COMPLETED; 119]</td></tr>
+  </tbody>
+</table>
+
 ## Two action sequences
 
 Start each sequence with a new fixture. Add an ACTIVE booking called `b1` in R204, owned by `owner`, from minute 120 to minute 180. Check the saved bookings and the notification list after each call.
