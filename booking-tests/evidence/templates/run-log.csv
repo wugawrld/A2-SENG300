@@ -2,3 +2,6 @@ checkpoint,command,git_commit,working_tree_clean,passed,failed,skipped,covered_l
 abdullah-save-failure,./mvnw -Dtest=SaveFailureTest test (Temurin 17.0.21),075b2292efead281c58aa31b87beef2c9be78562,yes,3,0,0,,,,,,evidence/runs/abdullah-save-failure/20261116-172035/
 divakar-r4-verify,"mvn clean verify (Maven 3.9.9, OpenJDK 17.0.14)",10d2d4667d00c59ef79c5c44677aac2a173d05da,yes,21,0,0,25,31,11,20,,evidence/runs/divakar-r4/20261116-191122/jacoco/
 divakar-r4-pit,"mvn test-compile org.pitest:pitest-maven:mutationCoverage (Maven 3.9.9, OpenJDK 17.0.14)",10d2d4667d00c59ef79c5c44677aac2a173d05da,yes,21,0,0,,,,,"{""KILLED"": 15, ""NO_COVERAGE"": 5}",evidence/runs/divakar-r4/20261116-191122/pit/
+r3-permission-focused,"mvn -Dtest=CancellationPermissionTest test (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,21,0,0,,,,,,evidence/runs/r3-permission/20261116-193118/
+r3-permission-verify,"mvn clean verify (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,42,0,0,25,31,11,20,,evidence/runs/r3-permission/20261116-193118/jacoco/
+r3-permission-pit,"mvn test-compile org.pitest:pitest-maven:mutationCoverage (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,42,0,0,,,,,"{""KILLED"": 15, ""NO_COVERAGE"": 5}",evidence/runs/r3-permission/20261116-193118/pit/
