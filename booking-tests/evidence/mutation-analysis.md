@@ -2,6 +2,8 @@
 
 Detailed reasoning for the mutants recorded in `templates/mutations.csv`. Counts and statuses come from the PIT reports listed under each run. PIT targets `BookingService` only, as configured in `pom.xml`.
 
+The three mutants discussed in the shared report are M1, M2 and M5. M3 is kept as an extra notification example.
+
 ## PIT runs
 
 | Run | Commit | Tests | Killed | No coverage | Survived | Score | Report |
@@ -62,6 +64,16 @@ Final score: 20 of 20 generated mutants killed, 100%.
 - **Detection:** `CancellationBoundaryTest.enforcesCancellationBoundary`, invocation 5 (121 minutes), in every run. The assertion is `assertEquals(List.of(cancelled), f.notifier.requests())`. The mutant leaves the list empty.
 - **Why the other assertions are not enough:** the response assertion and the stored data assertion both pass on this mutant. A test that checked only the return value and storage would report a pass while no notification was sent.
 - **Action:** none. Already detected.
+
+## M5 Overlap check on line 33 (R2)
+
+* Location and change. `RemoveConditionalMutator_EQUAL_ELSE` makes the final overlap check, `existing.start().isBefore(end)`, fail.
+* First run at `10d2d46`. PIT marked this `NO_COVERAGE` because the tests did not reach this overlap decision.
+* Final run at `a1c3514`. PIT marked it `KILLED` and listed `RoomConflictTest.classifiesIntervalBoundaries` case 7.
+* Assertion. The test requests [239, 300) while the same room has an active booking at [180, 240). The mutant allows the overlapping request. `assertEquals(expected, result.status())` catches it because the expected status is `CONFLICT`.
+* The new room conflict cases reached this decision. The initial and final reports identify the same mutation.
+
+[First PIT XML](runs/divakar-r4/20261116-191122/pit/mutations.xml) · [Final PIT XML](runs/divakar-final-pit/pit/mutations.xml)
 
 ## What this shows beyond coverage
 
