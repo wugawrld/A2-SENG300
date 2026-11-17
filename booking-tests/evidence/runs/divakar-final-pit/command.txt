@@ -1,0 +1,1 @@
+mvn -B test-compile org.pitest:pitest-maven:mutationCoverage (Maven 3.9.9 run directly; the ./mvnw wrapper checksum step failed on this machine)
