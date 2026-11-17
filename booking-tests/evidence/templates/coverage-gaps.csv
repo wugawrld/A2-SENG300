@@ -1,1 +1,3 @@
 gap_id,code_location,missing_case,requirement_id,test_added,assertions,before_evidence,after_evidence,remaining_limit
+G1,BookingService.java:48,Owner tries to cancel an inactive booking,R3,CancellationPermissionTest.ownerOfInactiveBookingIsRejectedBeforeTime,Expects INACTIVE with unchanged bookings and zero notifications,evidence/runs/starter-coverage/jacoco/index.html,evidence/runs/selina-part3-final/jacoco/index.html,Uses in-memory storage
+G2,BookingService.java:52,Owner tries to cancel 119 minutes before the start,R4,CancellationBoundaryTest.enforcesCancellationBoundary,Expects TOO_LATE with unchanged bookings and zero notifications,evidence/runs/starter-coverage/jacoco/index.html,evidence/runs/selina-part3-final/jacoco/index.html,Uses in-memory storage
