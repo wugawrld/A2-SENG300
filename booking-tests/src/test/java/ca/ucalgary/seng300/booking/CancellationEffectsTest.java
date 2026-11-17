@@ -3,7 +3,10 @@ package ca.ucalgary.seng300.booking;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static ca.ucalgary.seng300.booking.TestFixtures.*;
 
 import java.util.List;
 
@@ -68,5 +71,32 @@ public class CancellationEffectsTest {
     }
 
 
-   
+    /**
+     * R2 + R5 : Creating bookings should never send a notification
+     */
+    @Test void creatingTwoBookingsDoesNotRequestCancellationNotifications() {
+        TestFixtures f = new TestFixtures();
+
+        // two bookings in the same room
+        CreateResult first = f.service.create("R204", "owner", at(180), at(240));
+        CreateResult second = f.service.create("R204", "owner",at(240), at(300));
+
+        //both should be made
+        assertEquals(CreateStatus.CREATED, first.status());
+        assertEquals(CreateStatus.CREATED, second.status());
+        
+        // both should have an id and they should be different
+        assertNotNull(first.bookingId());
+        assertNotNull(second.bookingId());
+        assertNotEquals(first.bookingId(), second.bookingId());
+
+        //storage should hold two active bookings
+        assertEquals(List.of(
+            new Booking(first.bookingId(), "R204", "owner", at(180), at(240), BookingState.ACTIVE),
+            new Booking(second.bookingId(), "R204", "owner", at(240), at(300), BookingState.ACTIVE)),
+            f.repository.all());
+
+        // Creating bookings must not request any notification
+        assertTrue(f.notifier.requests().isEmpty());
+    }
 }
