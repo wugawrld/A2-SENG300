@@ -40,5 +40,33 @@ public class CancellationEffectsTest {
         assertTrue(f.notifier.requests().isEmpty());
     }
 
-    
+    /**
+     *  R4 + R5: the owner cancels exactly 120 minutes before start which is allowed
+     *  the booking msut be saved as cancelled and exactly one notification sent.
+     */
+    @Test 
+    void successfulCancellationPersistsAndNotifiesExactlyOnce() {
+        TestFixtures f = new TestFixtures();
+        // booking to cancels the starts in 120 minutes
+        Booking original = f.seed("b1", "R204", "owner", 120,180, BookingState.ACTIVE);
+
+        // unrelated booking that shouldnt change
+        Booking other = f.seed("other", "OTHER", "another", 300, 360, BookingState.CANCELLED);
+
+        // owner cancels so it should succeed
+        assertEquals(CancelStatus.CANCELLED, f.service.cancel("b1", "owner"));
+
+        //what the booking should look like
+        Booking expected = original.withState(BookingState.CANCELLED);
+
+        // target is canceled so other booking us untouched
+        assertEquals(List.of(expected, other), f.repository.all());
+
+        //Exactly one notification and its for the right booking 
+        assertEquals(List.of(expected), f.notifier.requests(), "Exact count and complete payload");
+
+    }
+
+
+   
 }
