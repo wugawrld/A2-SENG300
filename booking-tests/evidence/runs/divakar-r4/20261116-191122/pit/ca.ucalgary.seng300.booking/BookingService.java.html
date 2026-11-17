@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>BookingService.java</h1>
+
+<table class="src">
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package ca.ucalgary.seng300.booking;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.time.Clock;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.time.Duration;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.time.Instant;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.function.Supplier;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/** All inputs follow the domain in the assignment. Calls are sequential. */</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class BookingService {</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final BookingRepository repository;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Notifier notifier;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Clock clock;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Supplier&#60;String&#62; nextId;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** nextId must supply a fresh ID that is not already in the repository. */</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BookingService(BookingRepository repository, Notifier notifier,</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                          Clock clock, Supplier&#60;String&#62; nextId) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.repository = repository;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.notifier = notifier;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.clock = clock;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.nextId = nextId;</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public CreateResult create(String roomId, String ownerId, Instant start, Instant end) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Instant now = clock.instant();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_26'>2</a>
+<span>
+1. create : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+2. create : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (!start.isAfter(now) || !end.isAfter(start)) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_27'>1</a>
+<span>
+1. create : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return new CreateResult(CreateStatus.INVALID_TIME, null);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        for (Booking existing : repository.all()) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_30'/>
+30
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_30'>1</a>
+<span>
+1. create : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>            if (existing.state() == BookingState.ACTIVE</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_31'/>
+31
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_31'>1</a>
+<span>
+1. create : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                    &#38;&#38; existing.roomId().equals(roomId)</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_32'/>
+32
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_32'>1</a>
+<span>
+1. create : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                    &#38;&#38; start.isBefore(existing.end())</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_33'/>
+33
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_33'>1</a>
+<span>
+1. create : removed conditional - replaced equality check with false &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                    &#38;&#38; existing.start().isBefore(end)) {</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_34'/>
+34
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_34'>1</a>
+<span>
+1. create : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>                return new CreateResult(CreateStatus.CONFLICT, null);</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>        }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Booking booking = new Booking(nextId.get(), roomId, ownerId, start, end, BookingState.ACTIVE);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_38'/>
+38
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_38'>1</a>
+<span>
+1. create : removed call to ca/ucalgary/seng300/booking/BookingRepository::save &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        repository.save(booking);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_39'/>
+39
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_39'>1</a>
+<span>
+1. create : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new CreateResult(CreateStatus.CREATED, booking.id());</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public CancelStatus cancel(String bookingId, String callerId) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Booking booking = repository.find(bookingId);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_44'/>
+44
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_44'>1</a>
+<span>
+1. cancel : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (!booking.ownerId().equals(callerId)) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_45'/>
+45
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_45'>1</a>
+<span>
+1. cancel : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return CancelStatus.DENIED;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_47'>1</a>
+<span>
+1. cancel : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (booking.state() != BookingState.ACTIVE) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_48'/>
+48
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_48'>1</a>
+<span>
+1. cancel : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return CancelStatus.INACTIVE;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        long minutes = Duration.between(clock.instant(), booking.start()).toMinutes();</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_51'/>
+51
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_51'>2</a>
+<span>
+1. cancel : changed conditional boundary &rarr; KILLED<br/>
+2. cancel : removed conditional - replaced comparison check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (minutes &#60; 120) {</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_52'/>
+52
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_52'>1</a>
+<span>
+1. cancel : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return CancelStatus.TOO_LATE;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Booking cancelled = booking.withState(BookingState.CANCELLED);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_55'>1</a>
+<span>
+1. cancel : removed call to ca/ucalgary/seng300/booking/BookingRepository::save &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        repository.save(cancelled);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_56'/>
+56
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_56'>1</a>
+<span>
+1. cancel : removed call to ca/ucalgary/seng300/booking/Notifier::cancellationRequested &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        notifier.cancellationRequested(cancelled);</span></pre></td></tr>
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_57'/>
+57
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_57'>1</a>
+<span>
+1. cancel : replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return CancelStatus.CANCELLED;</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@f2fb225_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[method:acceptsFirstFutureMinuteAndPersistsFullBooking()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>create<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#3]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#5]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_30'>30</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_30'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_31'>31</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_31'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_32'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_33'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with false &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_34'>34</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_34'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>none</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; NO_COVERAGE</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_38'>38</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_38'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[method:acceptsFirstFutureMinuteAndPersistsFullBooking()]</span></span> removed call to ca/ucalgary/seng300/booking/BookingRepository::save &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_39'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>create<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[method:acceptsFirstFutureMinuteAndPersistsFullBooking()]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::create &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_44'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:denialThenOwnerCancellationPreservesTheValidPath()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_45'>45</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_45'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:denialThenOwnerCancellationPreservesTheValidPath()]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:successfulCancellationThenRepeatHasOnlyOneNotification()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_48'>48</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_48'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:successfulCancellationThenRepeatHasOnlyOneNotification()]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_51'>51</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_51'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.SaveFailureTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.SaveFailureTest]/[method:unarmedRepositoryAllowsTheSameValidCancellation()]</span></span> changed conditional boundary &rarr; KILLED</span>
+</div> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#2]</span></span> removed conditional - replaced comparison check with false &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_52'>52</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_52'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#2]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#5]</span></span> removed call to ca/ucalgary/seng300/booking/BookingRepository::save &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_56'>56</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_56'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#5]</span></span> removed call to ca/ucalgary/seng300/booking/Notifier::cancellationRequested &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@f2fb225_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@f2fb225_57'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>cancel<br/><b>Killed by : </b>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#5]</span></span> replaced return value with null for ca/ucalgary/seng300/booking/BookingService::cancel &rarr; KILLED</span>
+</div> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#5] (0 ms)</li><li>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#2] (0 ms)</li><li>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#3] (0 ms)</li><li>ca.ucalgary.seng300.booking.SaveFailureTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.SaveFailureTest]/[method:unarmedRepositoryAllowsTheSameValidCancellation()] (0 ms)</li><li>ca.ucalgary.seng300.booking.SaveFailureTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.SaveFailureTest]/[test-template:failedSavePropagatesWithoutChangingDataOrNotifying(long)]/[test-template-invocation:#2] (0 ms)</li><li>ca.ucalgary.seng300.booking.SaveFailureTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.SaveFailureTest]/[test-template:failedSavePropagatesWithoutChangingDataOrNotifying(long)]/[test-template-invocation:#1] (0 ms)</li><li>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:denialThenOwnerCancellationPreservesTheValidPath()] (0 ms)</li><li>ca.ucalgary.seng300.booking.CancellationSequencesTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationSequencesTest]/[method:successfulCancellationThenRepeatHasOnlyOneNotification()] (0 ms)</li><li>ca.ucalgary.seng300.booking.BookingServiceStarterTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.BookingServiceStarterTest]/[method:ownerCanCancelEarly()] (0 ms)</li><li>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#1] (8 ms)</li><li>ca.ucalgary.seng300.booking.CancellationBoundaryTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CancellationBoundaryTest]/[test-template:enforcesCancellationBoundary(long, ca.ucalgary.seng300.booking.CancelStatus)]/[test-template-invocation:#4] (10 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[method:acceptsFirstFutureMinuteAndPersistsFullBooking()] (0 ms)</li><li>ca.ucalgary.seng300.booking.BookingServiceStarterTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.BookingServiceStarterTest]/[method:createsFutureBooking()] (30 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#5] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#6] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#3] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#4] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#1] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[test-template:rejectsInvalidTimesWithoutEffects(long, long)]/[test-template-invocation:#2] (0 ms)</li><li>ca.ucalgary.seng300.booking.CreationTimeTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.CreationTimeTest]/[method:invalidTimeTakesPrecedenceOverAnOverlap()] (0 ms)</li><li>ca.ucalgary.seng300.booking.BookingServiceStarterTest.[engine:junit-jupiter]/[class:ca.ucalgary.seng300.booking.BookingServiceStarterTest]/[method:otherStudentIsDenied()] (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.17.4
+
+</body>
+</html>
