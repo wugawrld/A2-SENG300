@@ -13,3 +13,5 @@ r3-permission-pit,"mvn test-compile org.pitest:pitest-maven:mutationCoverage (Ma
 sardar-r2-focused-20261116-151607,./mvnw -Dtest=RoomConflictTest test,1cdeb4c6f05bd66cdff8003f3c339b18d2147fd4,not recorded,15,0,0,,,,,,evidence/runs/sardar-r2/
 starter-coverage,.\mvnw.cmd -B clean verify,6fdf68816a4b9b3d970646c69aba9fdfc80c6703,yes,3,0,0,22,31,7,20,,evidence/runs/starter-coverage/
 selina-part3-final,./mvnw clean verify,c0ecb43ef619f3e09948187479062279de001cb0,yes,60,0,0,31,31,20,20,,evidence/runs/selina-part3-final/
+divakar-final-verify,"mvn -B clean verify (Maven 3.9.9, OpenJDK 17.0.14)",a1c3514de1ac91d0c06fb5db68d38d7b75b1621f,yes (only untracked evidence folders),60,0,0,31,31,20,20,,evidence/runs/divakar-final-pit/jacoco/
+divakar-final-pit,"mvn -B test-compile org.pitest:pitest-maven:mutationCoverage (Maven 3.9.9, OpenJDK 17.0.14)",a1c3514de1ac91d0c06fb5db68d38d7b75b1621f,yes (only untracked evidence folders),60,0,0,,,,,"{""KILLED"": 20}",evidence/runs/divakar-final-pit/pit/
