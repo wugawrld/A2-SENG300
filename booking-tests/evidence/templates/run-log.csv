@@ -1,8 +1,8 @@
 checkpoint,command,git_commit,working_tree_clean,passed,failed,skipped,covered_lines,total_lines,covered_branches,total_branches,mutation_status_counts,report_path
-
-
 saarim-r5,./mvnw -Dtest=CancellationEffectsTest test,4e2159a,True,3,0,0,,,,,,evidence/runs/saarim-r5/20261116-182445
 bug-reference,./mvnw clean test -Dtest=CancellationEffectsTest#nonOwnerCannotChangeStoredBooking,4e2159a,True,1,0,0,,,,,,evidence/runs/bug-reference
 bug-faulty,./mvnw clean test -Dtest=CancellationEffectsTest#nonOwnerCannotChangeStoredBooking,92a5445,True,0,1,0,,,,,,evidence/runs/bug-faulty
 bug-repaired,./mvnw clean test -Dtest=CancellationEffectsTest#nonOwnerCannotChangeStoredBooking,14d6486,True,1,0,0,,,,,,evidence/runs/bug-repaired
 bug-repaired-full,./mvnw clean test,14d6486,True,14,0,0,,,,,,evidence/runs/bug-repaired-full
+abdullah-save-failure,./mvnw -Dtest=SaveFailureTest test (Temurin 17.0.21),075b2292efead281c58aa31b87beef2c9be78562,yes,3,0,0,,,,,,evidence/runs/abdullah-save-failure/20261116-172035/
+
