@@ -5,3 +5,4 @@ divakar-r4-pit,"mvn test-compile org.pitest:pitest-maven:mutationCoverage (Maven
 r3-permission-focused,"mvn -Dtest=CancellationPermissionTest test (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,21,0,0,,,,,,evidence/runs/r3-permission/20261116-193118/
 r3-permission-verify,"mvn clean verify (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,42,0,0,25,31,11,20,,evidence/runs/r3-permission/20261116-193118/jacoco/
 r3-permission-pit,"mvn test-compile org.pitest:pitest-maven:mutationCoverage (Maven 3.9.9, OpenJDK 17.0.14)",6eb115869bd0414937e1977f718d1589ebff1cd7,yes,42,0,0,,,,,"{""KILLED"": 15, ""NO_COVERAGE"": 5}",evidence/runs/r3-permission/20261116-193118/pit/
+sardar-r2-focused-20261116-151607,./mvnw -Dtest=RoomConflictTest test,1cdeb4c6f05bd66cdff8003f3c339b18d2147fd4,not recorded,15,0,0,,,,,,evidence/runs/sardar-r2/
