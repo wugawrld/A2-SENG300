@@ -46,7 +46,11 @@ cd booking-tests
 
 ## Reports and evidence
 
-* [Shared and individual reports](reports/)
+Our shared report covers Parts 1–6.
+
+[Open the Group 8 shared report](https://github.com/wugawrld/A2-SENG300/blob/main/reports/Group_8_Shared_Report.md)
+
+* [Individual reports](reports/individual/)
 * [Test plan, test map, run log, and contribution record](booking-tests/evidence/templates/)
 * [Saved test output, coverage, and mutation reports](booking-tests/evidence/runs/)
 * [Bug repair patch](faulty-version/repair-from-faulty.patch)
